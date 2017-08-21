@@ -3,6 +3,8 @@
 //
 
 #include <cstddef>
+#include <stdexcept>
+#include <iostream>
 #include "btree.h"
 
 btree::btree() {
@@ -49,6 +51,10 @@ void btree::insert(int key) {
     }
 };
 
+node* btree::search(int key) {
+    return search(key, root);
+};
+
 node* btree::search(int key, node *leaf) {
     if (leaf != NULL) {
         if (key == leaf->key_value)
@@ -59,4 +65,19 @@ node* btree::search(int key, node *leaf) {
             return search(key, leaf->right);
     }
     else return NULL;
+}
+
+void btree::inorder() {
+    if (root != NULL)
+        inorder(root);
+    else
+        throw std::invalid_argument("root is null");
+}
+
+void btree::inorder(node *leaf) {
+    if (leaf->left != NULL)
+        inorder(leaf->left);
+    std::cout << "node value: " << leaf->key_value << "\n";
+    if (leaf->right != NULL)
+        inorder(leaf->right);
 }

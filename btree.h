@@ -23,6 +23,8 @@ class btree {
 
         void destroy_tree();
 
+        void inorder();
+
     private:
         void destroy_tree(node *leaf);
 
@@ -31,6 +33,8 @@ class btree {
         node* search(int key, node *leaf);
 
         node* root;
+
+        void inorder(node *leaf);
 };
 
 
